@@ -24,7 +24,9 @@ export class CatsRepository {
     return newCat.readOnlyData;
   }
 
-  async findCatByIdWithoutPassword(catId: string): Promise<Cat | null> {
+  async findCatByIdWithoutPassword(
+    catId: string,
+  ): Promise<CatRequestDto | null> {
     const cat = await this.catModel.findById(catId).select('-password');
     return cat;
   }

@@ -1,6 +1,5 @@
 import {
   Body,
-  Req,
   UploadedFiles,
   UseFilters,
   UseGuards,
@@ -16,9 +15,8 @@ import { ReadOnlyCatDto } from '../dto/cat.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { LoginRequestDto } from 'src/auth/dto/login.request.dto';
 import { JwtAuthGuard } from 'src/auth/jwt/jwt.guard';
-import { Request } from 'express';
 import { CurrentUser } from 'src/common/decorators/user.decorators';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { multerOptions } from 'src/common/utils/multer.options';
 import { Cat } from '../cats.schema';
 
@@ -67,8 +65,6 @@ export class CatsController {
     @UploadedFiles() files: Array<Express.Multer.File>,
     @CurrentUser() cat: Cat,
   ) {
-    console.log(files);
-
     return this.catsService.uploadImg(cat, files);
   }
 
